@@ -1,0 +1,46 @@
+{
+  "name": "@dimerapp/cli-utils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "mrm": "mrm --preset=@adonisjs/mrm-preset",
+    "commit": "git-cz",
+    "lint": "standard"
+  },
+  "keywords": [
+    "dimer"
+  ],
+  "author": "virk",
+  "license": "MIT",
+  "devDependencies": {
+    "@adonisjs/mrm-preset": "^1.0.10",
+    "commitizen": "^2.10.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "japa": "^1.0.6",
+    "japa-cli": "^1.0.1",
+    "mrm": "^1.2.1",
+    "pkg-ok": "^2.2.0",
+    "standard": "^11.0.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "nyc": {
+    "exclude": [
+      "test",
+      "japaFile.js"
+    ]
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "log-symbols": "^2.2.0",
+    "log-update": "^2.3.0",
+    "terminal-link": "^1.1.0"
+  }
+}
