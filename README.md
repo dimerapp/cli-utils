@@ -18,7 +18,6 @@
 # Dimer cli utils
 > Handy utils for Dimer CLI.
 
-[![travis-image]][travis-url]
 [![npm-image]][npm-url]
 
 There's no need for this package. But I am finding myself creating more small packages, over sticking everything to one repo.
@@ -192,9 +191,6 @@ Everyone is welcome to contribute. Please take a moment to review the [contribut
 [thetutlage](https://github.com/thetutlage) and [contributors](https://github.com/dimerapp/cli-utils/graphs/contributors).
 
 MIT License, see the included [MIT](LICENSE.md) file.
-
-[travis-image]: https://img.shields.io/travis/dimerapp/cli-utils/master.svg?style=flat-square&logo=travis
-[travis-url]: https://travis-ci.org/dimerapp/cli-utils "travis"
 
 [npm-image]: https://img.shields.io/npm/v/@dimerapp/cli-utils.svg?style=flat-square&logo=npm
 [npm-url]: https://npmjs.org/package/@dimerapp/cli-utils "npm"

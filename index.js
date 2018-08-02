@@ -127,6 +127,10 @@ utils.wrapInBraces = function (lhs, rhs, newLine) {
  * @return {void}
  */
 utils.versionsProgress = function (versions) {
+  if (!versions.length) {
+    return
+  }
+
   const lhsNodes = versions.map(({ no }) => `{Version ${no}}`)
 
   const largestTotal = Math.max(...versions.map(({ total }) => String(total).length))
@@ -159,6 +163,10 @@ utils.versionsProgress = function (versions) {
  * @return {void}
  */
 utils.filesErrors = function (basePath, errors) {
+  if (!errors.length) {
+    return
+  }
+
   const names = errors.map(({ name }) => `(${name.replace(`${basePath}/`, '')})`)
 
   const largestName = Math.max(...names.map((name) => name.length))
@@ -186,6 +194,10 @@ utils.filesErrors = function (basePath, errors) {
  * @return {void}
  */
 utils.configErrors = function (errors) {
+  if (!errors.length) {
+    return
+  }
+
   const messages = errors.map(({ key, message }) => {
     return chalk`{red   "${key.join('/')}": "${message}"}`
   })
