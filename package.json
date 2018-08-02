@@ -1,6 +1,6 @@
 {
   "name": "@dimerapp/cli-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Handy utils for Dimer CLI",
   "main": "index.js",
   "files": [
