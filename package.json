@@ -1,7 +1,7 @@
 {
   "name": "@dimerapp/cli-utils",
   "version": "1.0.0",
-  "description": "",
+  "description": "Handy utils for Dimer CLI",
   "main": "index.js",
   "files": [
     "index.js"
@@ -42,5 +42,13 @@
     "log-symbols": "^2.2.0",
     "log-update": "^2.3.0",
     "terminal-link": "^1.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dimerapp/cli-utils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dimerapp/cli-utils/issues"
+  },
+  "homepage": "https://github.com/dimerapp/cli-utils#readme"
 }
