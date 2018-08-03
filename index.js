@@ -180,6 +180,19 @@ utils.versionsProgress = function (versions) {
 }
 
 /**
+ * Clear the self update stream. It is important to call this
+ * method after calling versionProgress, otherwise CLI will
+ * be messed up.
+ *
+ * @method versionsProgressClear
+ *
+ * @return {void}
+ */
+utils.versionsProgressClear = function () {
+  logUpdate.done()
+}
+
+/**
  * Print all errors for multiple files. Errors must be part
  * of `vfile` messages.
  *
