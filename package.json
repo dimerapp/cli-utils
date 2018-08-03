@@ -1,6 +1,6 @@
 {
   "name": "@dimerapp/cli-utils",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Handy utils for Dimer CLI",
   "main": "index.js",
   "files": [
@@ -38,7 +38,7 @@
     ]
   },
   "dependencies": {
-    "chalk": "^2.4.1",
+    "kleur": "^2.0.1",
     "log-symbols": "^2.2.0",
     "log-update": "^2.3.0",
     "terminal-link": "^1.1.0"

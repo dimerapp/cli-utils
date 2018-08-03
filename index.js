@@ -7,27 +7,57 @@
 * file that was distributed with this source code.
 */
 
-const chalk = require('chalk')
+const kleur = require('kleur')
 const logUpdate = require('log-update')
 const terminalLink = require('terminal-link')
 const logSymbols = require('log-symbols')
 
 const utils = exports = module.exports = {}
 
+/**
+ * Pad string with empty spaces
+ *
+ * @method padString
+ *
+ * @param  {String|Number}  value
+ * @param  {Number}         minWidth
+ * @param  {Boolean}        prefix
+ *
+ * @return {String}
+ */
 function padString (value, minWidth, prefix) {
   const actualWidth = String(value).length
   const diff = (minWidth - actualWidth) + 1
   return prefix ? `${new Array(diff).join(' ')}${value}` : `${value}${new Array(diff).join(' ')}`
 }
 
+/**
+ * Print new line when boolean is true
+ *
+ * @method printLine
+ *
+ * @param  {Boolean}  newLine
+ *
+ * @return {void}
+ */
 function printLine (newLine) {
   if (newLine) {
     console.log('')
   }
 }
 
+/**
+ * Beautify lhs and rhs
+ *
+ * @method beautify
+ *
+ * @param  {String} lhs
+ * @param  {String} rhs
+ *
+ * @return {void}
+ */
 function beautify (lhs, rhs) {
-  return chalk`{cyan ${lhs} => {dim ${rhs}}}`
+  return kleur.cyan(`${lhs} => ${kleur.dim(rhs)}`)
 }
 
 /**
@@ -42,7 +72,7 @@ function beautify (lhs, rhs) {
  */
 utils.info = function (message, newLine) {
   printLine(newLine)
-  console.log(chalk`{yellow ${message}...}`)
+  console.log(kleur.yellow(`${message}...`))
 }
 
 /**
@@ -59,7 +89,7 @@ utils.error = function (error, newLine) {
   printLine(newLine)
 
   const message = error.message ? error.message : error
-  console.log(chalk`{red ERROR:} ${message}`)
+  console.log(`${kleur.red('ERROR:')} ${message}`)
 }
 
 /**
@@ -76,7 +106,7 @@ utils.error = function (error, newLine) {
 utils.attention = function (message, newLine) {
   printLine(newLine)
 
-  console.log(chalk`{magenta IMPORTANT:} ${message}`)
+  console.log(`${kleur.magenta('IMPORTANT:')} ${message}`)
 }
 
 /**
@@ -90,7 +120,7 @@ utils.attention = function (message, newLine) {
  * @return {void}
  */
 utils.action = function (action, message) {
-  console.log(chalk`{cyan ${action}:} ${message}`)
+  console.log(`${kleur.cyan(action)} ${message}`)
 }
 
 /**
@@ -138,7 +168,7 @@ utils.versionsProgress = function (versions) {
   const largestLhsNode = Math.max(...lhsNodes.map((node) => node.length))
 
   const rhsNodes = versions.map(({ processed, total }) => {
-    const prefix = processed === total ? `processed ` : `processing`
+    const prefix = processed === total ? ` processed` : `processing`
     return `${prefix} ${padString(processed, largestProcessed, true)} of ${padString(total, largestTotal, true)}`
   })
 
@@ -147,6 +177,19 @@ utils.versionsProgress = function (versions) {
   })
 
   logUpdate([''].concat(messages).join('\n'))
+}
+
+/**
+ * Clear the self update stream. It is important to call this
+ * method after calling versionProgress, otherwise CLI will
+ * be messed up.
+ *
+ * @method versionsProgressClear
+ *
+ * @return {void}
+ */
+utils.versionsProgressClear = function () {
+  logUpdate.done()
 }
 
 /**
@@ -175,10 +218,10 @@ utils.filesErrors = function (basePath, errors) {
   const errorMessages = names.map((name, index) => {
     const error = errors[index]
     const url = `https://github.com/dimerapp/rules/blob/master/${error.ruleId}.md`
-    const link = error.ruleId ? terminalLink(chalk.dim(error.ruleId), url) : ''
+    const link = error.ruleId ? terminalLink(kleur.dim(error.ruleId), url) : ''
     const symbol = error.fatal ? logSymbols.error : logSymbols.warning
 
-    return chalk`${symbol}  {dim ${padString(name, largestName)}} ${padString(error.message, largestMessage)} ${link}`
+    return `${symbol}  ${kleur.dim(padString(name, largestName))} ${padString(error.message, largestMessage)} ${link}`
   })
 
   console.log([''].concat(errorMessages).join('\n'))
@@ -199,13 +242,13 @@ utils.configErrors = function (errors) {
   }
 
   const messages = errors.map(({ key, message }) => {
-    return chalk`{red   "${key.join('/')}": "${message}"}`
+    return kleur.red(`  "${key.join('/')}": "${message}"`)
   })
 
   console.log(
-    ['', chalk.red('```dimer.json'), chalk.red('{')]
+    ['', kleur.red('```dimer.json'), kleur.red('{')]
       .concat(messages)
-      .concat([chalk.red('}'), chalk.red('```')])
+      .concat([kleur.red('}'), kleur.red('```')])
       .join('\n')
   )
 }
