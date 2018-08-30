@@ -161,7 +161,7 @@ utils.versionsProgress = function (versions) {
     return
   }
 
-  const lhsNodes = versions.map(({ no }) => `{Version ${no}}`)
+  const lhsNodes = versions.map(({ no, zoneSlug }) => `{ ${zoneSlug}:${no} }`)
 
   const largestTotal = Math.max(...versions.map(({ total }) => String(total).length))
   const largestProcessed = Math.max(...versions.map(({ processed }) => String(processed).length))
@@ -241,14 +241,14 @@ utils.configErrors = function (errors) {
     return
   }
 
-  const messages = errors.map(({ key, message }) => {
-    return kleur.red(`  "${key.join('/')}": "${message}"`)
+  const largestMessage = Math.max(...errors.map(({ message }) => `> ${message}`.length))
+  const errorMessages = errors.map((error) => {
+    const url = `https://github.com/dimerapp/rules/blob/master/${error.ruleId}.md`
+    const link = error.ruleId ? terminalLink(kleur.dim(error.ruleId), url) : ''
+    return `${kleur.red(padString(`> ${error.message}`, largestMessage))} ${link}`
   })
 
-  console.log(
-    ['', kleur.red('```dimer.json'), kleur.red('{')]
-      .concat(messages)
-      .concat([kleur.red('}'), kleur.red('```')])
-      .join('\n')
-  )
+  console.log('')
+  console.log(kleur.red('Following errors detected in dimer.json file:'))
+  console.log(errorMessages.join('\n'))
 }
